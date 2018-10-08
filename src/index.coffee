@@ -84,9 +84,9 @@ class DatadogPlugin
     delay 5, ->
       datadog.flush ->
         debug 'Flushed metrics to Datadog'
-        callback
+        callback()
       , ->
         debug 'Unable to send metrics to Datadog!'
-        callback
+        callback()
 
 module.exports = DatadogPlugin
