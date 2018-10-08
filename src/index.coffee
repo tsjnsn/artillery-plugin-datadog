@@ -3,6 +3,8 @@
 # License: Apache-2.0
 "use strict"
 datadog = require 'datadog-metrics'
+HttpsProxyAgent = require 'https-proxy-agent'
+url = require 'url'
 debug = require('debug')('plugin:datadog')
 
 class DatadogPlugin
@@ -15,17 +17,22 @@ class DatadogPlugin
     # Set event handlers
     debug 'Binding event handlers...'
     @ee.on 'stats', @addStats
-    @ee.on 'done', @flushStats
 
   getDatadogConfig: ->
-    host: @config.plugins.datadog.host || ''
-    prefix: @config.plugins.datadog.prefix || 'artillery.'
+    proxy = if @config.plugins.datadog.proxy?
+      agent: new HttpsProxyAgent(url.parse(@config.plugins.datadog.proxy))
+
+    defaults =
+      host: @config.plugins.datadog.host || ''
+      prefix: @config.plugins.datadog.prefix || 'artillery.'
+
+    { defaults..., proxy... }
 
   # Return a list of Datadog tags for all metrics
   # Example: ['target: google.com', 'team:sre']
   getTags: ->
     tags = [
-      "target:#{@config.target}"
+      "target:#{@config.target}", "pid:#{process.pid}"
     ]
     tags.concat @config.plugins.datadog.tags
 
@@ -72,11 +79,14 @@ class DatadogPlugin
     for name, value of metrics
       value[1](name, value[0], tags)
 
-
-  flushStats: (statsObject) ->
-    datadog.flush ->
-      debug 'Flushed metrics to Datadog'
-    , ->
-      debug 'Unable to send metrics to Datadog!'
+  delay = (ms, func) -> setTimeout func, ms
+  cleanup: (callback) ->
+    delay 5, =>
+      datadog.flush ->
+        debug 'Flushed metrics to Datadog'
+        callback
+      , ->
+        debug 'Unable to send metrics to Datadog!'
+        callback
 
 module.exports = DatadogPlugin
