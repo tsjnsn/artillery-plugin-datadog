@@ -1,8 +1,8 @@
 {
-  "buildCommand": "coffee -c -o dist/ src",
+  "buildCommand": "coffee -c test src && npm pack",
   "github": {
     "release": true,
-    "assets": ["src/index.js"]
+    "assets": ["/*.tgz"]
   },
   "npm": {
     "publish": false
