@@ -11,16 +11,16 @@
   "author": "Ando Roots <ando.roots@bigbank.ee>",
   "license": "Apache-2.0",
   "dependencies": {
-    "debug": "2.2.0",
+    "debug": "4.0.1",
     "datadog-metrics": "^0.8.1"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec && coffeelint src/"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
+    "chai": "^4.2.0",
     "chai-string": "^1.2",
-    "mocha": "^3.0",
-    "coffeelint": "^1.15"
+    "mocha": "^5.2",
+    "coffeelint": "^2.1"
   }
 }
