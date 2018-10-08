@@ -11,8 +11,9 @@
   "author": "Ando Roots <ando.roots@bigbank.ee>",
   "license": "Apache-2.0",
   "dependencies": {
-    "debug": "4.0.1",
-    "datadog-metrics": "^0.8.1"
+    "debug": "^3.1.0",
+    "datadog-metrics": "^0.8.1",
+    "https-proxy-agent": "^2.2.1"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec && coffeelint src/"

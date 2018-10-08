@@ -48,10 +48,8 @@ describe '#getTags', ->
           tags: ['team:sre']
       target: 'https://twitter.com/Stranger_Things'
 
-    expect(datadogPlugin.getTags()).to.deep.equal [
-      'target:https://twitter.com/Stranger_Things',
-      'team:sre'
-    ]
+    expect(datadogPlugin.getTags()).to.contain('target:https://twitter.com/Stranger_Things')
+    expect(datadogPlugin.getTags()).to.contain('team:sre')
 
 describe '#getOkPercentage', ->
   it 'should return 0 when no queries were made', ->

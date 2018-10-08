@@ -81,7 +81,7 @@ class DatadogPlugin
 
   delay = (ms, func) -> setTimeout func, ms
   cleanup: (callback) ->
-    delay 5, =>
+    delay 5, ->
       datadog.flush ->
         debug 'Flushed metrics to Datadog'
         callback
