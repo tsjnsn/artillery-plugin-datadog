@@ -1,0 +1,10 @@
+{
+  "buildCommand": "coffee -c -o dist/ src",
+  "github": {
+    "release": true,
+    "assets": ["src/index.js"]
+  },
+  "npm": {
+    "publish": false
+  }
+}
