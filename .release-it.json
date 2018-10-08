@@ -2,7 +2,7 @@
   "buildCommand": "coffee -c test src && npm pack",
   "github": {
     "release": true,
-    "assets": ["/*.tgz"]
+    "assets": ["*.tgz"]
   },
   "npm": {
     "publish": false
