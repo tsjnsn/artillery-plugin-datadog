@@ -1,6 +1,6 @@
 {
   "name": "artillery-plugin-datadog",
-  "version": "0.2.0-beta.0",
+  "version": "0.2.0-beta.1",
   "description": "Datadog output plugin for Artillery",
   "main": "src/index.js",
   "keywords": [
